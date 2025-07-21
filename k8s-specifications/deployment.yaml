@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculator-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calculator
+  template:
+    metadata:
+      labels:
+        app: calculator
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64   # <-- This is where you define the target architecture
+      containers:
+      - name: calculator
+        image: devopsproject.azurecr.io/calculator:183
+        ports:
+        - containerPort: 80
